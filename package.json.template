@@ -94,8 +94,8 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
-{{#if includeHttp}}    "express": "^4.17.1",
+{{#includeHttp}}    "express": "^4.17.1",
     "serverless-http": "^2.7.0",
-{{/if}}    "source-map-support": "^0.5.21"
+{{/includeHttp}}    "source-map-support": "^0.5.21"
   }
 }
