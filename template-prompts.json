@@ -17,15 +17,9 @@
     },
     {
       "type": "confirm",
-      "name": "enableRest",
-      "default": true,
-      "message": "Include an Rest entpoints?"
-    },
-    {
-      "type": "confirm",
       "name": "integrateWithS3",
       "default": false,
-      "message": "Include an Rest entpoints?"
+      "message": "Include s3 integration?"
     },
     {
       "type": "confirm",
