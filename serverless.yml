@@ -13,7 +13,7 @@ custom:
       mountCode: True
     docker:
       # Enable this flag to run "docker ..." commands as sudo
-      sudo: Falselayers:
+      sudo: False
   {{#integrateWithS3 }}bucket: ${env:BUCKET, 'ffmpeg-layer-gif-maker'}{{/integrateWithS3}}
 
 {{#includeFfmpeg}}

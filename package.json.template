@@ -4,6 +4,10 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major",
     "test": "jest",
     "build": "tsc",
     "lint": "eslint  './**/*.ts'"
@@ -96,6 +100,7 @@
   "dependencies": {
 {{#includeHttp}}    "express": "^4.17.1",
     "serverless-http": "^2.7.0",
-{{/includeHttp}}    "source-map-support": "^0.5.21"
+{{/includeHttp}}    "source-map-support": "^0.5.21",
+    "standard-version": "^9.3.2"
   }
 }
