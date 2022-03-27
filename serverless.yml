@@ -14,13 +14,13 @@ custom:
     docker:
       # Enable this flag to run "docker ..." commands as sudo
       sudo: Falselayers:
-  {{#if integrateWithS3 }}bucket: ${env:BUCKET, 'ffmpeg-layer-gif-maker'}{{/if}}
+  {{#integrateWithS3 }}bucket: ${env:BUCKET, 'ffmpeg-layer-gif-maker'}{{/integrateWithS3}}
 
-{{#if includeFfmpeg}}
+{{#includeFfmpeg}}
 layers:
   ffmpeg:
     path: layer
-{{/if}}
+{{/includeFfmpeg}}
 
 provider:
   name: aws
@@ -36,14 +36,14 @@ provider:
     tags: # Tags that will be added to each of the deployment resources
       service: my-service
       team: backend
-{{#if integrateWithS3}}
+{{#integrateWithS3}}
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:PutObject
         - s3:GetObject
       Resource: "arn:aws:s3:::${self:custom.bucket}/*"
-{{/if}}
+{{/integrateWithS3}}
 
 # vpc:
 #   securityGroupIds:
@@ -65,19 +65,20 @@ package:
     - 'README.md'
 
 functions:
-{{ #if integrateWithS3 }}  s3upload-trigger:
+{{ #integrateWithS3 }}  s3upload-trigger:
     handler: build/index.s3Handler
     timeout: 30
     events:
       - s3: ${self:custom.bucket}
     layers:
-      {{#if includeFfmpeg}}- {Ref: FfmpegLambdaLayer}{{/if}}
-{{/if}}
-{{ #if includeHttp }}  apigateway-handler:
+      {{#includeFfmpeg}}- {Ref: FfmpegLambdaLayer}{{/includeFfmpeg}}
+{{/integrateWithS3}}
+{{ #includeHttp }}  apigateway-handler:
     handler: build/index.apiGatewayHandler
       events:
         - httpApi: '*'
-{{/if}}
+{{/includeHttp}}
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline
