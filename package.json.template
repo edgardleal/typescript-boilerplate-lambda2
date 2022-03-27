@@ -1,0 +1,101 @@
+{
+  "name": "{{ project }}",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "lint": "eslint  './**/*.ts'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint -s && npm run check",
+      "pre-push": "npm test --NODE_ENV=test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "type-case": [
+        2,
+        "always",
+        "lower-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "chore",
+          "feat",
+          "fix",
+          "refactor",
+          "revert",
+          "test",
+          "deps"
+        ]
+      ],
+      "scope-empty": [
+        2,
+        "always"
+      ],
+      "type-empty": [
+        2,
+        "never"
+      ],
+      "subject-empty": [
+        2,
+        "never"
+      ],
+      "subject-min-length": [
+        2,
+        "always",
+        10
+      ],
+      "subject-full-stop": [
+        2,
+        "never",
+        "."
+      ],
+      "subject-case": [
+        2,
+        "always",
+        "lower-case"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/aws-lambda": "^8.10.93",
+    "@types/google-spreadsheet": "^3.0.0",
+    "@types/html-to-text": "^8.0.1",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^13.9.0",
+    "@types/serverless": "^3.0.1",
+    "@types/source-map-support": "^0.5.4",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.3.6",
+    "jest": "^27.5.1",
+    "lint-staged": "^10.5.4",
+    "npm-check-updates": "^11.1.4",
+    "serverless": "^3.10.0",
+    "serverless-offline": "^8.5.0",
+    "serverless-plugin-typescript": "^2.1.1",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    {{#if includeHttp}}    "express": "^4.17.1",
+    "serverless-http": "^2.7.0",
+{{/if}}    "source-map-support": "^0.5.21"
+  }
+}

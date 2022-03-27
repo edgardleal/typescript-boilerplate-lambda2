@@ -1,0 +1,48 @@
+{
+  "questions": [
+    {
+      "type": "input",
+      "name": "author",
+      "message": "Author names"
+    },
+    {
+      "type": "input",
+      "name": "project",
+      "message": "Project names"
+    },
+    {
+      "type": "input",
+      "name": "description",
+      "message": "Project description"
+    },
+    {
+      "type": "confirm",
+      "name": "enableRest",
+      "default": true,
+      "message": "Include an Rest entpoints?"
+    },
+    {
+      "type": "confirm",
+      "name": "integrateWithS3",
+      "default": false,
+      "message": "Include an Rest entpoints?"
+    },
+    {
+      "type": "confirm",
+      "name": "includeFfmpeg",
+      "default": false,
+      "when": "/Function((res) => res.integrateWithS3)/",
+      "message": "Include FFMPEG layear?"
+    },
+    {
+      "type": "confirm",
+      "name": "includeHttp",
+      "default": true,
+      "message": "Include http api?"
+    }
+  ],
+  "post": [
+    ["mv", "package.json.template", "package.json"],
+    ["mv", "index.ts.template", "index.ts"]
+  ]
+}
